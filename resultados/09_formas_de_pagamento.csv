@@ -1,0 +1,5 @@
+tipo,pedidos,pedidos_pct,valor_total,valor_medio,parcelas_media
+credit_card,76505,76.9,12542084.19,163.32,3.5
+boleto,19784,19.9,2869361.27,145.03,1.0
+voucher,3866,3.9,379436.87,65.7,1.0
+debit_card,1528,1.5,217989.79,142.57,1.0
