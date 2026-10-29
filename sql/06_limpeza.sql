@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS stg_customers;
+DROP TABLE IF EXISTS stg_sellers;
+DROP TABLE IF EXISTS stg_geolocation;
+DROP TABLE IF EXISTS stg_category_translation;
+DROP TABLE IF EXISTS stg_products;
+DROP TABLE IF EXISTS stg_orders;
+DROP TABLE IF EXISTS stg_order_items;
+DROP TABLE IF EXISTS stg_order_payments;
+DROP TABLE IF EXISTS stg_order_reviews;

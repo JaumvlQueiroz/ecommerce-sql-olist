@@ -1,0 +1,4 @@
+dados/*.csv
+dados/*.zip
+*.db
+__pycache__/
