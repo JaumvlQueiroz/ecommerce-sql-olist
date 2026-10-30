@@ -10,7 +10,7 @@ Arquivo gerado automaticamente por `executar.py`.
 | Coordenadas fora do território brasileiro | 42 | Descartadas no cálculo da coordenada média |
 | Prefixos de CEP com mais de uma grafia de cidade | 8.555 | Mantida a grafia mais frequente de cada prefixo |
 | Clientes com CEP sem geolocalização | 279 | Mantidos; a geolocalização não é obrigatória |
-| Mesmo review_id usado em mais de um pedido | 802 | Chave primária composta (avaliacao_id, pedido_id) |
+| Mesmo review_id usado em mais de um pedido | 789 | Chave primária composta (avaliacao_id, pedido_id) |
 | Produtos sem categoria | 610 | Categoria mantida nula |
 | Categorias sem tradução para o inglês | 2 | Cadastradas com nome em inglês nulo |
 | Pedidos com status entregue e sem data de entrega | 8 | Fora das análises de prazo de entrega |
@@ -111,12 +111,12 @@ Consulta: [`consultas/05_atraso_e_avaliacao.sql`](../consultas/05_atraso_e_avali
 
 | faixa | pedidos | nota_media | notas_1_e_2_pct | notas_5_pct |
 | --- | --- | --- | --- | --- |
-| 10 dias ou mais antes do prazo | 61.849 | 4,31 | 9,1 | 63,6 |
-| Até 9 dias antes ou no prazo | 28.087 | 4,21 | 10,4 | 58,2 |
-| 1 a 3 dias de atraso | 1.870 | 3,28 | 32,5 | 33,0 |
-| 4 a 7 dias de atraso | 1.802 | 2,09 | 68,0 | 13,7 |
-| 8 a 14 dias de atraso | 1.478 | 1,67 | 80,3 | 6,8 |
-| Mais de 14 dias de atraso | 1.384 | 1,72 | 78,4 | 7,1 |
+| 10 dias ou mais antes do prazo | 61.523 | 4,32 | 8,9 | 63,9 |
+| Até 9 dias antes ou no prazo | 27.920 | 4,22 | 10,1 | 58,5 |
+| 1 a 3 dias de atraso | 1.852 | 3,29 | 32,2 | 33,2 |
+| 4 a 7 dias de atraso | 1.748 | 2,11 | 67,6 | 14,1 |
+| 8 a 14 dias de atraso | 1.446 | 1,67 | 80,1 | 6,8 |
+| Mais de 14 dias de atraso | 1.335 | 1,73 | 78,2 | 7,2 |
 
 ## Quantos clientes voltam a comprar?
 
