@@ -94,7 +94,7 @@ Antes de montar as páginas, coloque cada medida em um cartão e compare com os 
 | Prazo médio (dias) | 12,6 |
 | Pedidos atrasados | 6,8% |
 | Nota média | 4,1 |
-| Notas 1 e 2 | 14,2% |
+| Notas 1 e 2 | 13,8% |
 | Clientes | 94.983 |
 | Clientes com recompra | 3,0% |
 | Vendedores ativos | 3.053 |

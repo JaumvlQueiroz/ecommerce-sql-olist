@@ -115,7 +115,7 @@ Alguns dos problemas encontrados e como foram tratados:
 | --- | --- | --- |
 | Linhas repetidas na base de geolocalização | 261.831 | Agregação em uma linha por prefixo de CEP |
 | Prefixos de CEP com mais de uma grafia de cidade | 8.555 | Mantida a grafia mais frequente, escolhida com `ROW_NUMBER` |
-| Mesmo `review_id` usado em mais de um pedido | 802 | Chave primária composta (`avaliacao_id`, `pedido_id`) |
+| Mesmo `review_id` usado em mais de um pedido | 789 | Chave primária composta (`avaliacao_id`, `pedido_id`) |
 | Pedidos com status entregue e sem data de entrega | 8 | Fora das análises de prazo |
 | Coordenadas fora do território brasileiro | 42 | Descartadas no cálculo da coordenada média |
 
