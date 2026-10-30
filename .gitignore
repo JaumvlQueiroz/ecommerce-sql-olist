@@ -2,3 +2,4 @@ dados/*.csv
 dados/*.zip
 *.db
 __pycache__/
+powerbi/dados/

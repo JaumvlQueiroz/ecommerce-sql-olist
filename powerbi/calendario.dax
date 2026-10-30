@@ -1,0 +1,17 @@
+Calendario =
+ADDCOLUMNS(
+    CALENDAR(DATE(2016, 9, 1), DATE(2018, 9, 30)),
+    "Ano", YEAR([Date]),
+    "Número do mês", MONTH([Date]),
+    "Mês", SWITCH(
+        MONTH([Date]),
+        1, "jan", 2, "fev", 3, "mar", 4, "abr", 5, "mai", 6, "jun",
+        7, "jul", 8, "ago", 9, "set", 10, "out", 11, "nov", 12, "dez"
+    ),
+    "Mês/ano", SWITCH(
+        MONTH([Date]),
+        1, "jan", 2, "fev", 3, "mar", 4, "abr", 5, "mai", 6, "jun",
+        7, "jul", 8, "ago", 9, "set", 10, "out", 11, "nov", 12, "dez"
+    ) & "/" & RIGHT(YEAR([Date]), 2),
+    "Ano e mês", YEAR([Date]) * 100 + MONTH([Date])
+)

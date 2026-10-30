@@ -1,0 +1,70 @@
+Faturamento = SUM(fato_itens[preco])
+
+Pedidos = DISTINCTCOUNT(fato_itens[pedido_id])
+
+Ticket médio = DIVIDE([Faturamento], [Pedidos])
+
+Frete = SUM(fato_itens[frete])
+
+Frete sobre produtos = DIVIDE([Frete], [Faturamento])
+
+Faturamento mês anterior =
+CALCULATE([Faturamento], DATEADD(Calendario[Date], -1, MONTH))
+
+Variação mensal = DIVIDE([Faturamento] - [Faturamento mês anterior], [Faturamento mês anterior])
+
+Faturamento acumulado no ano = TOTALYTD([Faturamento], Calendario[Date])
+
+Pedidos entregues =
+CALCULATE(COUNTROWS(fato_pedidos), fato_pedidos[entregue] = 1)
+
+Prazo médio (dias) = AVERAGE(fato_pedidos[dias_entrega])
+
+Pedidos atrasados = AVERAGE(fato_pedidos[atrasado])
+
+Nota média = AVERAGE(fato_pedidos[nota])
+
+Notas 1 e 2 =
+DIVIDE(
+    CALCULATE(COUNTROWS(fato_pedidos), fato_pedidos[nota] <= 2),
+    COUNT(fato_pedidos[nota])
+)
+
+Clientes =
+CALCULATE(DISTINCTCOUNT(dim_cliente[cliente_unico_id]), fato_itens)
+
+Clientes com recompra =
+VAR PorCliente =
+    CALCULATETABLE(
+        ADDCOLUMNS(
+            VALUES(dim_cliente[cliente_unico_id]),
+            "@pedidos", CALCULATE(DISTINCTCOUNT(fato_itens[pedido_id]))
+        ),
+        fato_itens
+    )
+RETURN
+    DIVIDE(
+        COUNTROWS(FILTER(PorCliente, [@pedidos] >= 2)),
+        COUNTROWS(PorCliente)
+    )
+
+Vendedores ativos = DISTINCTCOUNT(fato_itens[vendedor_id])
+
+Vendedores para 80% do faturamento =
+VAR Total = CALCULATE([Faturamento], ALLSELECTED(dim_vendedor))
+VAR PorVendedor =
+    CALCULATETABLE(
+        ADDCOLUMNS(VALUES(fato_itens[vendedor_id]), "@fat", [Faturamento]),
+        ALLSELECTED(dim_vendedor)
+    )
+VAR ComAcumulado =
+    ADDCOLUMNS(
+        PorVendedor,
+        "@antes",
+            VAR Atual = [@fat]
+            RETURN SUMX(FILTER(PorVendedor, [@fat] > Atual), [@fat])
+    )
+RETURN
+    COUNTROWS(FILTER(ComAcumulado, [@antes] < 0.8 * Total))
+
+Parcela dos vendedores para 80% = DIVIDE([Vendedores para 80% do faturamento], [Vendedores ativos])

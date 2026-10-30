@@ -8,6 +8,7 @@ Banco de dados relacional construído a partir de 1,5 milhão de linhas de dados
 - **ETL em SQL:** os CSVs entram em tabelas de staging e são tipados, padronizados e deduplicados até o modelo final.
 - **Qualidade de dados:** 12 verificações automáticas, cada uma com o tratamento aplicado.
 - **SQL analítico:** `JOIN`, CTEs, view, `CASE` e window functions (`LAG`, `RANK`, `ROW_NUMBER`, soma acumulada e janela nomeada).
+- **Power BI:** modelo dimensional (esquema estrela) exportado para um dashboard com medidas DAX. Veja [`powerbi/`](powerbi/).
 
 ## Principais resultados
 
@@ -101,7 +102,8 @@ A view `vw_pedidos` reúne em uma linha por pedido o cliente, os valores, o praz
 | 4 | [`sql/04_views.sql`](sql/04_views.sql) | View analítica com uma linha por pedido |
 | 5 | [`sql/05_qualidade.sql`](sql/05_qualidade.sql) | Relatório de qualidade gravado na tabela `relatorio_qualidade` |
 | 6 | [`consultas/`](consultas/) | Consultas de negócio, com resultado salvo em `resultados/` |
-| 7 | [`sql/06_limpeza.sql`](sql/06_limpeza.sql) | Remoção das tabelas de staging, que não são mais necessárias |
+| 7 | [`sql/07_modelo_dimensional.sql`](sql/07_modelo_dimensional.sql) | Fatos e dimensões exportados em CSV para o Power BI |
+| 8 | [`sql/06_limpeza.sql`](sql/06_limpeza.sql) | Remoção das tabelas de staging, que não são mais necessárias |
 
 O script [`executar.py`](executar.py) roda as etapas em ordem e confere a integridade referencial com `PRAGMA foreign_key_check`.
 
@@ -148,13 +150,14 @@ Requisitos: Python 3.9 ou superior. Não há bibliotecas para instalar, porque o
 python executar.py
 ```
 
-Em cerca de 30 segundos o script cria o banco `olist.db` e atualiza a pasta `resultados/`. O banco pode ser aberto no DBeaver ou em qualquer cliente SQLite para explorar as tabelas.
+Em cerca de 30 segundos o script cria o banco `olist.db`, atualiza a pasta `resultados/` e gera os CSVs do Power BI em `powerbi/dados/`. O banco pode ser aberto no DBeaver ou em qualquer cliente SQLite para explorar as tabelas.
 
 ## Estrutura
 
 ```
 ├── consultas/       consultas de negócio
 ├── dados/           CSVs da Olist (não versionados)
+├── powerbi/         modelo, medidas DAX, tema e roteiro do dashboard
 ├── resultados/      resultado de cada consulta em CSV e relatório em Markdown
 ├── sql/             staging, modelo, transformação, view e qualidade
 └── executar.py      executa todas as etapas

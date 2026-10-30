@@ -1,0 +1,18 @@
+{
+  "name": "Portfólio João Vitor Queiroz",
+  "dataColors": ["#0F62FE", "#8D8D8D", "#DA1E28", "#24A148", "#8A3FFC", "#FF832B", "#1192E8", "#005D5D"],
+  "foreground": "#161616",
+  "foregroundNeutralSecondary": "#525252",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F4F4F4",
+  "tableAccent": "#0F62FE",
+  "good": "#24A148",
+  "bad": "#DA1E28",
+  "neutral": "#8D8D8D",
+  "textClasses": {
+    "callout": { "fontFace": "Segoe UI Light", "fontSize": 28, "color": "#161616" },
+    "title": { "fontFace": "Segoe UI Semibold", "fontSize": 13, "color": "#161616" },
+    "header": { "fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#161616" },
+    "label": { "fontFace": "Segoe UI", "fontSize": 10, "color": "#525252" }
+  }
+}

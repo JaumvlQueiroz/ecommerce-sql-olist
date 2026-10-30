@@ -9,6 +9,7 @@ PASTA_DADOS = PASTA / "dados"
 PASTA_SQL = PASTA / "sql"
 PASTA_CONSULTAS = PASTA / "consultas"
 PASTA_RESULTADOS = PASTA / "resultados"
+PASTA_POWERBI = PASTA / "powerbi" / "dados"
 BANCO = PASTA / "olist.db"
 
 ARQUIVOS_STAGING = {
@@ -29,6 +30,14 @@ TABELAS_FINAIS = [
 ]
 
 LIMITE_LINHAS_RELATORIO = 30
+
+TABELAS_POWERBI = {
+    "dw_fato_pedidos": "fato_pedidos.csv",
+    "dw_fato_itens": "fato_itens.csv",
+    "dw_dim_cliente": "dim_cliente.csv",
+    "dw_dim_vendedor": "dim_vendedor.csv",
+    "dw_dim_produto": "dim_produto.csv",
+}
 
 
 def conferir_arquivos():
@@ -140,6 +149,29 @@ def executar_consultas(conexao, secao_qualidade):
     (PASTA_RESULTADOS / "RESULTADOS.md").write_text(relatorio, encoding="utf-8")
 
 
+def valor_brasileiro(valor):
+    if valor is None:
+        return ""
+    if isinstance(valor, float):
+        return repr(valor).replace(".", ",")
+    return valor
+
+
+def exportar_powerbi(conexao):
+    PASTA_POWERBI.mkdir(parents=True, exist_ok=True)
+    for visao, nome_arquivo in TABELAS_POWERBI.items():
+        cursor = conexao.execute(f"SELECT * FROM {visao}")
+        colunas = [d[0] for d in cursor.description]
+        with open(PASTA_POWERBI / nome_arquivo, "w", encoding="utf-8-sig", newline="") as saida:
+            escritor = csv.writer(saida, delimiter=";")
+            escritor.writerow(colunas)
+            total = 0
+            for linha in cursor:
+                escritor.writerow(valor_brasileiro(v) for v in linha)
+                total += 1
+        print(f"  {nome_arquivo:<26} {total:>9,} linhas".replace(",", "."))
+
+
 def main():
     inicio = time.perf_counter()
     conferir_arquivos()
@@ -169,11 +201,16 @@ def main():
     print("4. Executando as consultas de negócio")
     executar_consultas(conexao, secao_qualidade)
 
+    print("5. Exportando o modelo dimensional para o Power BI")
+    executar_script(conexao, PASTA_SQL / "07_modelo_dimensional.sql")
+    exportar_powerbi(conexao)
+
     executar_script(conexao, PASTA_SQL / "06_limpeza.sql")
     conexao.execute("VACUUM")
     conexao.close()
     print(f"\nBanco criado em {BANCO.name} em {time.perf_counter() - inicio:.1f}s.")
     print("Resultados em resultados/RESULTADOS.md")
+    print("Arquivos do Power BI em powerbi/dados/")
 
 
 if __name__ == "__main__":
