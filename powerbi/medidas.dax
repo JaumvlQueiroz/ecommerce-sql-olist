@@ -26,7 +26,7 @@ Nota média = AVERAGE(fato_pedidos[nota])
 
 Notas 1 e 2 =
 DIVIDE(
-    CALCULATE(COUNTROWS(fato_pedidos), fato_pedidos[nota] <= 2),
+    CALCULATE(COUNT(fato_pedidos[nota]), fato_pedidos[nota] <= 2),
     COUNT(fato_pedidos[nota])
 )
 
