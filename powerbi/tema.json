@@ -1,12 +1,12 @@
 {
   "name": "Portfólio João Vitor Queiroz",
-  "dataColors": ["#0F62FE", "#8D8D8D", "#DA1E28", "#24A148", "#8A3FFC", "#FF832B", "#1192E8", "#005D5D"],
+  "dataColors": ["#0F62FE", "#8D8D8D", "#DA1E28", "#002D9C", "#FF832B", "#8A3FFC", "#1192E8", "#005D5D"],
   "foreground": "#161616",
   "foregroundNeutralSecondary": "#525252",
   "background": "#FFFFFF",
   "backgroundLight": "#F4F4F4",
   "tableAccent": "#0F62FE",
-  "good": "#24A148",
+  "good": "#0F62FE",
   "bad": "#DA1E28",
   "neutral": "#8D8D8D",
   "textClasses": {

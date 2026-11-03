@@ -104,7 +104,7 @@ Antes de montar as páginas, coloque cada medida em um cartão e compare com os 
 
 ### 6. Aplicar o tema
 
-**Exibir → Temas → Procurar temas** e escolha [`tema.json`](tema.json). O tema usa uma cor de destaque (azul) e cinzas, e reserva vermelho e verde para indicar situação ruim e boa.
+**Exibir → Temas → Procurar temas** e escolha [`tema.json`](tema.json). O tema usa uma cor de destaque (azul) e cinzas, e reserva vermelho para situação ruim e azul para situação boa. Vermelho e verde ficaram de fora porque pessoas com daltonismo do tipo mais comum não conseguem diferenciá-los.
 
 ## As três páginas
 
